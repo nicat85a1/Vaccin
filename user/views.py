@@ -26,7 +26,7 @@ def signup(request):
 
 def login(request):
     #form = LoginForm(request.POST or None)
-    form = LoginForm(request, data=request.POST)
+    form = LoginForm(data=request.POST)
     if request.method == "POST":
         print(form)
         if form.is_valid():
