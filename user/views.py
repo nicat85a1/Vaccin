@@ -25,7 +25,8 @@ def signup(request):
     return render(request, "user/signup.html", context)
 
 def login(request):
-    form = LoginForm(request.POST or None)
+    #form = LoginForm(request.POST or None)
+    form = LoginForm(request, data=request.POST)
     if request.method == "POST":
         print(form)
         if form.is_valid():
