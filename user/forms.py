@@ -22,16 +22,6 @@ class SignUpForm(UserCreationForm):
             "identity_document_number",
         ]
 
-"""class LoginForm(AuthenticationForm):
-    def __init__(self, *args, **kwargs):
-        super(LoginForm, self).__init__(*args, **kwargs)
-        for visible in self.visible_fields():
-            visible.field.widget.attrs['class'] = 'form-control'
-    
-    class Meta:
-        model = User
-        fields = "__all__"""
-
 class LoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)
@@ -40,4 +30,4 @@ class LoginForm(AuthenticationForm):
     
     class Meta:
         model = User
-        fields = ("username", "password")
+        fields = "__all__"
