@@ -17,13 +17,30 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+from django.contrib.auth import views as autViews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name="index"),
     path("center/", include("center.urls", namespace="center")),
     path("vaccine/", include("vaccin.urls", namespace="vaccine")),
-    path('accounts/', include("user.urls", namespace="user"))
+    path('accounts/', include("user.urls", namespace="user")),
+    path("password_reset/", autViews.PasswordResetView.as_view(), name="password_reset"),
+    path(
+        "password_reset/done/",
+        autViews.PasswordResetDoneView.as_view(),
+        name="password_reset_done",
+    ),
+    path(
+        "reset/<uidb64>/<token>/",
+        autViews.PasswordResetConfirmView.as_view(),
+        name="password_reset_confirm",
+    ),
+    path(
+        "reset/done/",
+        autViews.PasswordResetCompleteView.as_view(),
+        name="password_reset_complete",
+    ),
 ]
 
 from django.conf import settings
