@@ -5,7 +5,10 @@ from vaccin.forms import VaccineForm
 from django.http import Http404, HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required , permission_required
+from django.utils.decorators import method_decorator
 
+@method_decorator(login_required, name="dispatch")
 class VaccineList(View):
     def get(self, request):
         vaccine_list = Vaccine.objects.all()
@@ -14,6 +17,7 @@ class VaccineList(View):
         }
         return render(request, "vaccine/vaccine_list.html", context)
 
+@method_decorator(login_required, name="dispatch")
 class VaccineDetail(View):
     def get(self, request, pk):
         vaccine_detail = get_object_or_404(Vaccine, pk=pk)
@@ -22,6 +26,8 @@ class VaccineDetail(View):
         }
         return render(request, "vaccine/vaccine_detail.html", context)
 
+@method_decorator(login_required, name="dispatch")
+@method_decorator(permission_required('vaccin.add_vaccin',raise_exception=True), name="dispatch")
 class VaccineCreate(View):
     form_class = VaccineForm
     template_name = "vaccine/create_vaccine.html"
@@ -37,6 +43,8 @@ class VaccineCreate(View):
             return redirect('vaccin:list')
         return render(request, self.template_name, {'form': form})
 
+@method_decorator(login_required, name="dispatch")
+@method_decorator(permission_required('vaccin.change_vaccin',raise_exception=True), name="dispatch")
 class VaccineUpdate(View):
     form_class = VaccineForm
     template_name = "vaccine/update_vaccine.html"
@@ -60,6 +68,8 @@ class VaccineUpdate(View):
             return HttpResponseRedirect(reverse("vaccin:detail", kwargs={"pk": vaccine.pk}))
         return render(request, self.template_name, {'form': form})
 
+@method_decorator(login_required, name="dispatch")
+@method_decorator(permission_required('vaccin.delete_vaccin',raise_exception=True), name="dispatch")
 class VaccineDelete(View):
     template_name = "vaccine/delete_vaccine.html"
 

@@ -25,6 +25,7 @@ urlpatterns = [
     path("center/", include("center.urls", namespace="center")),
     path("vaccine/", include("vaccin.urls", namespace="vaccine")),
     path('accounts/', include("user.urls", namespace="user")),
+    path('campagin/', include("campagin.urls", namespace="campagin")),
     path("password_reset/", autViews.PasswordResetView.as_view(), name="password_reset"),
     path(
         "password_reset/done/",
