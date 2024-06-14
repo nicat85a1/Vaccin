@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Campaing, Slot
+from .models import Campagin, Slot
 
-admin.site.register(Campaing)
+admin.site.register(Campagin)
 admin.site.register(Slot)

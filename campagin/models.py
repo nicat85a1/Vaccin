@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
-class Campaing(models.Model):
+class Campagin(models.Model):
     center = models.ForeignKey(Center,on_delete=models.CASCADE)
     vaccine = models.ForeignKey(Vaccine,on_delete=models.CASCADE)
     start_date = models.DateField(null=True,blank=True)
@@ -16,7 +16,7 @@ class Campaing(models.Model):
         return self.center.name + " | " + self.vaccine.name
     
 class Slot(models.Model):
-    campaing = models.ForeignKey(Campaing, on_delete=models.CASCADE)
+    campagin = models.ForeignKey(Campagin, on_delete=models.CASCADE)
     date =models.DateField(null=True, blank=True)
     start_time =models.TimeField(null=True,blank=True)
     end_time =models.TimeField(null=True,blank=True)
